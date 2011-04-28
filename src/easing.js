@@ -1,10 +1,7 @@
 /**
-* Adapted from Robert Penner's AS3 tweening equations.
-*
-* Adapted from Grant Skinner's GTweener
-* Copyright (c) 2009 Grant Skinner
-*
-* Copyright (c) 2011 colorhook@gmail.com
+* Copyright (c) 2011 http://colorhook.com
+* Author: colorhook@gmail.com 
+* License: Released under the MIT License.
 * 
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -26,7 +23,13 @@
 * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
-**/
+*
+* Inspired by Grant Skinner's GTweener
+* Copyright (c) 2009 Grant Skinner
+*
+* Adapted from Robert Penner's AS3 tweening equations.
+* Adapted from Grant Skinner's GTweener
+*/
 YUI.add('k2-easing', function(Y){
 	
 	var s = 1.70158,

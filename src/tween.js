@@ -1,8 +1,7 @@
 /**
-* Inspired by Grant Skinner's GTweener
-* Copyright (c) 2009 Grant Skinner
-*
-* Copyright (c) 2011 colorhook@gmail.com
+* Copyright (c) 2011 http://colorhook.com
+* Author: colorhook@gmail.com 
+* License: Released under the MIT License.
 * 
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -24,19 +23,41 @@
 * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
-**/
+*
+* Inspired by Grant Skinner's GTweener
+* Copyright (c) 2009 Grant Skinner
+*/
 YUI.add('k2-tween', function(Y){
 	
 	var linearEase =  function(a){
 		return a;	
 	},
 	
-	Tween = function(target, duration, values, props, pluginData){
+	Tween = function(target, values, props, pluginData){
 		props = props || {};
 		Tween.superclass.constructor.apply(this, arguments);
 		this.set('ease', props.ease || Tween.defaultEase);
 		this.set('target', target);
-		this.set('duration', duration || 1000);
+		this.set('duration', props.duration || 1000);
+		if(props.delay){
+			this.set('delay', props.delay);
+		}
+		if(props.autoPlay){
+			this.set('autoPlay', props.autoPlay);
+		}
+		if(props.reflect){
+			this.set('reflect', props.reflect);
+		}
+		if(props.repeatCount){
+			this.set('repeatCount', props.repeatCount);
+		}
+		if(props.nextTween){
+			this.set('nextTween', props.nextTween);
+		}
+		if(props.timeScale){
+			this.set('timeScale', props.timeScale);
+		}
+
 		this.pluginData = this.copy(pluginData, {});
 		if(props){
 			var swap = props.swapValues;
@@ -303,7 +324,8 @@ YUI.add('k2-tween', function(Y){
 		linearEase:linearEase,
 		defaultEase: linearEase,
 		pauseAll: false,
-		timeScaleAll: 10,
+		timeScaleAll: 1,
+		tickTime: 10,
 		hasStarPlugins: false,
 		plugins: {
 			
@@ -338,19 +360,13 @@ YUI.add('k2-tween', function(Y){
 			
 			for(var o in this.tickList){
 				o = this.tickList[o];
-				var p = this.timeScaleAll * o.get('timeScale');
+				var p = this.tickTime * this.timeScaleAll * o.get('timeScale');
 				o.set('position', o.get('position') + p);
 				
 			}
 		},
 		staticInit: function(){
-			var self = this,
-			 	loop = function(){
-					self.staticTick();
-				   
-				};
-			loop();
-			 setInterval(loop, 100);
+			Y.later(this.tickTime, this, this.staticTick, null, true);
 		}
 	});
 	

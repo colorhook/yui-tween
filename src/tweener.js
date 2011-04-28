@@ -1,8 +1,7 @@
 /**
-* Inspired by Grant Skinner's GTweener
-* Copyright (c) 2009 Grant Skinner
-*
-* Copyright (c) 2011 colorhook@gmail.com
+* Copyright (c) 2011 http://colorhook.com
+* Author: colorhook@gmail.com 
+* License: Released under the MIT License.
 * 
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -24,7 +23,10 @@
 * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
-**/
+*
+* Inspired by Grant Skinner's GTweener
+* Copyright (c) 2009 Grant Skinner
+*/
 YUI.add('k2-tweener', function(Y){
 
 	var Tween = Y.Tween,
@@ -58,14 +60,14 @@ YUI.add('k2-tweener', function(Y){
 		},
 		
 		
-		to: function(target, duration, values, props, pluginData){
-			var tween = new Tween(target, duration, values, props, pluginData);
+		to: function(target, values, props, pluginData){
+			var tween = new Tween(target, values, props, pluginData);
 			this.add(tween);
 			return tween;
 		},
 		
-		from: function(target, duration, values, props, pluginData){
-				var tween = new Tween(target, duration, values, props, pluginData);
+		from: function(target, values, props, pluginData){
+				var tween = new Tween(target,values, props, pluginData);
 				this.add(tween);
 				tween.swapValues();
 				return tween;

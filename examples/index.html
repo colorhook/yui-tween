@@ -2,31 +2,48 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>K2 Tweener Examples</title>
+		<title>K2 Tween Examples - Back Easing</title>
+		<style>
+		body{
+			font-size:12px;
+			font-family: Console;
+			background:#f2f2f2;
+		}
+		p{
+			margin:0;
+			line-height:20px;
+		}
+		</style>
 	</head>
 	<body>
+		<h1>K2 Tween Examples - Back Easing</h1>
+		<div id='logDiv'></div>
 		<script src="http://k.kbcdn.com/k2/seed/seed-1-3-4.js" charset="utf-8"></script>
 		<script src="../src/tween.js" charset="utf-8"></script>
 		<script src="../src/tweener.js" charset="utf-8"></script>
 		<script src="../src/easing.js" charset="utf-8"></script>
 		<script>
-		YUI().use('k2-tweener', "k2-easing", function(Y){
-			var target= {x: 0}
-			var tween = Y.Tweener.to(target, 1000, {
-				x: 1000
+		YUI().use("k2-tweener", "k2-easing", "node-base", function(Y){
+			var target= {x: 0, y:0};
+			var d = new Date();
+			var tween = Y.Tweener.to(target, {
+				x: 100,
+				y: 50
 			},{
-				
+				duration: 300,
+				ease: Y.Easing.Back.easeInOut
 			});
-			tween.on('init', function(){
-				//console.log("target.x");
+			var logDiv = Y.one('#logDiv');
+			log = function(s){
+				logDiv.appendChild(Y.Node.create("<p>"+s+"</p>"));
+			}
+			tween.on('change', function(e){
+				log("[change]x:"+e.target.get('target').x+" y:"+target.y);
 			});
-			tween.on('change', function(){
-				//console.log("change:"+target.x);
-			});
-			tween.on('complete', function(){
-			//	console.log("complete:"+target.x);
+			tween.on('complete', function(e){
+				log("[complete]x:"+target.x+" y:"+target.y);
 			})
-		})
+		});
 		</script>
 	</body>
 </html>
